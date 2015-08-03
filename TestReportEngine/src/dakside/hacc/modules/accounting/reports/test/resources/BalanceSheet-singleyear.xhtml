@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+{%
+var assets_idx = 0;
+var liabilities_idx = -1;
+var equity_idx = -1;
+
+%}
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+    <head>
+        <title>{{ title }}</title>
+        <style type="text/css">
+            h1{
+                font-size: 18pt;
+                color: orange;
+                font-family: Verdana, Lucida Grande, sans-serif;
+                width: 100%;
+                text-align: center;
+                font-weight: bold;
+            }
+            p{
+                font-size: 9pt;
+                font-family: Verdana, Lucida Grande, sans-serif;
+                width: 100%;
+                text-align: left;
+            }
+            .ledger{
+                width: 100%;
+                font-family: Verdana, Lucida Grande, sans-serif;
+                font-size: 9pt;
+            }
+            .ledger_header{
+                border-bottom: 1px solid black;
+                border-collapse:collapse;
+            }
+            .ledger_row{
+            }
+
+            .ledger_row_group{
+                border-bottom:1px solid black;
+                border-collapse:collapse;
+            }
+            .ledger_cell{
+                background-color: #FFFFFF;
+                color: #000000;
+            }
+            .ledger_cell_right{
+                background-color: #FFFFFF;
+                color: #000000;
+                text-align: right;
+            }
+            .ledger_cell_group{
+                color: #0066CC;
+                font-weight: bold;
+            }
+            .ledger_cell_group_right{
+                color: #0066CC;
+                font-weight: bold;
+                text-align: right;
+            }
+            .ledger_cell_total{
+                border-top: 1px solid black;
+                color: orange;
+                font-weight: bold;
+            }
+            .ledger_cell_total_right{
+                border-top: 1px solid black;
+                color: orange;
+                font-weight: bold;
+                text-align:right;
+            }
+        </style>
+    </head>
+
+    <body>
+        <h1>{{ title }}</h1>
+        <p>Generated date: {{ new Date() }}</p>
+
+        <table class="ledger">
+            <thead>
+                <tr class="ledger_header">
+                    <td class="ledger_header" style="width: 50%" colspan="3">Assets</td>
+                    <td class="ledger_header" style="width: 50%" colspan="3">Liabilities and Owners' Equity</td>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr class="ledger_row">
+                    <td class="ledger_cell_total">Total</td>
+                    <td class="ledger_cell_total">&nbsp;</td>
+                    <td class="ledger_cell_total_right">{{total_assets}}</td>
+                    <td class="ledger_cell_total">Total</td>
+                    <td class="ledger_cell_total">&nbsp;</td>
+                    <td class="ledger_cell_total_right">{{total_liabilities_equity}}</td>
+                </tr>
+            </tfoot>
+            <tbody>
+                {%
+                while(assets_idx < assets.getChildren().length ||
+                liabilities_idx <= liabilities.getChildren().length ||
+                equity_idx <= equity.getChildren().length) {
+                %}
+                <tr class="ledger_row_group">
+                    {%
+                    if(assets_idx < assets.getChildren().length){
+                    %}
+                    <td class="ledger_cell">{{assets.getChildren()[assets_idx]}}</td>
+                    <td class="ledger_cell_right">{{assets.getChildren()[assets_idx].getBalance()}}</td>
+                    <td class="ledger_cell_right">&nbsp;</td>
+                    {%
+                    }
+                    else{
+                    %}<td class="ledger_cell" colspan="3">&nbsp;</td>{%
+                    }
+
+                    if(liabilities_idx == -1){
+                    %}<td class="ledger_cell" colspan="3">Liabilities</td>{%
+                    }
+                    else if(liabilities_idx == liabilities.getChildren().length){
+                    %}
+                    <td class="ledger_cell_group">Total liabilities</td>
+                    <td class="ledger_cell_group">&nbsp;</td>
+                    <td class="ledger_cell_group_right">{{liabilities.getBalance()}}</td>
+                    {%
+                    }
+                    else if(liabilities_idx < liabilities.getChildren().length){
+                    %}
+                    <td class="ledger_cell">{{liabilities.getChildren()[liabilities_idx]}}</td>
+                    <td class="ledger_cell_right">{{liabilities.getChildren()[liabilities_idx].getBalance()}}</td>
+                    <td class="ledger_cell">&nbsp;</td>
+                    {%
+                    }
+                    else{
+                        if(equity_idx == -1){
+                            %}<td class="ledger_cell" colspan="3">Owner's equity</td>{%
+                        }
+                        else if(equity_idx == equity.getChildren().length){
+                            %}
+                            <td class="ledger_cell_group">Total owner's equity</td>
+                            <td class="ledger_cell_group">&nbsp;</td>
+                            <td class="ledger_cell_group_right">{{equity.getBalance()}}</td>
+                            {%
+                        }
+                        else if(equity_idx < equity.getChildren().length){
+                            %}
+                            <td class="ledger_cell">{{equity.getChildren()[equity_idx]}}</td>
+                            <td class="ledger_cell_right">{{equity.getChildren()[equity_idx].getBalance()}}</td>
+                            <td class="ledger_cell">&nbsp;</td>
+                            {%
+                        }
+                        equity_idx++;
+                    }
+                    %}
+                </tr>
+                {%
+                assets_idx++;
+                liabilities_idx++;
+                }
+                %}
+            </tbody>
+        </table>
+    </body>
+</html>

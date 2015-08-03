@@ -1,0 +1,8 @@
+﻿ASSETS: {{assets.getChildren().size()}}<br/>
+{%
+for(assets_idx=0; assets_idx<assets.getChildren().size();assets_idx++){
+%}
+{{assets.getChildren().get(assets_idx).getName()}}
+{%
+}
+%}

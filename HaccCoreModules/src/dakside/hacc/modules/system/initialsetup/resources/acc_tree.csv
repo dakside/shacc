@@ -1,0 +1,22 @@
+Code,Name,Type,Parent_Code,Currency
+1,Assets,Folder,R,SGD
+11,Cash,Debit,1,SGD
+12,Bank,Debit,1,SGD
+13,AR Loan,Debit,1,SGD
+2,Liability,Folder,R,SGD
+21,AP Borrow,Credit,2,SGD
+3,Owner's equity,Folder,R,SGD
+31,Capital,Credit,3,SGD
+32,Retained Earnings,Folder,3,SGD
+321,Revenue,Folder,32,SGD
+3211,Salary,Credit,321,SGD
+3212,Other Incomes,Credit,321,SGD
+322,Expenses,Folder,32,SGD
+3221,Rental,Debit,322,SGD
+3222,PUB,Debit,322,SGD
+3223,Food,Debit,322,SGD
+3224,Transport,Debit,322,SGD
+3225,Entertainment,Debit,322,SGD
+3226,Household,Debit,322,SGD
+3227,Shopping,Debit,322,SGD
+3228,Expenses - Others,Debit,322,SGD

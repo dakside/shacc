@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+    {%
+	function Student(_name, _address, _phone){
+		this.name = _name;
+		this.address = _address;
+		this.phone = _phone;
+
+                this.getName = function(){
+                	return (this.name.length > 0) ? "Hi, I'm " + this.name + ". "
+                        : "Hi, I don't want to tell you my name. ";
+                }
+
+		this.getPhone = function(){
+			return (this.phone.length > 0) ? "My phone number is " + this.phone + ". "
+                        : "I don't use handphone. ";
+		}
+
+                this.getAddress = function(){
+			return (this.address.length > 0) ? "My address is " + this.address + ". "
+                        : "I'm homeless. ";
+                }
+
+		this.getInfo = function() {
+			return this.getName() + this.getAddress() + this.getPhone();
+		}
+	}
+
+	var students = new Array();
+	students.push(new Student("Harry Potter", "No.4 Privet Drive", "123456")
+            ,new Student("Ron Weasley", "The Burrow", "654321")
+            ,new Student("Sirius Black", "No. 12 Grimmauld Place", "010101")
+            ,new Student("Bill Weasley", "Shell Cottage", "227713")
+            ,new Student("Cho Chang", "Hogwarts", "014582")
+            ,new Student("Olive Hornby", "", "")
+            ,new Student("Moaning Myrtle", "Hogwarts, 2nd floor, girls' lavatory", "")
+            ,new Student("", "", "")
+            ,new Student("Noname00", "0A7F49BE@HDD@Computer", "00001111")
+        );
+
+	var title = "Test XAR template";
+    	var header = 'Simple student list';
+    	var date = new Date();
+%}
+    <head>
+        <title>{{ title }}</title>
+        <style type="text/css">
+            body{
+                font-size: 9pt;
+                font-family: Verdana, Lucida Grande, sans-serif;
+                width: 99%;
+                text-align: left;
+            }
+            table{
+                width: 99%;
+                border: 1px solid black;
+                border-collapse: collapse;
+            }
+            h1{
+                text-align: center;
+                width: 99%;
+                font-size: 18pt;
+                font-weight: bold;
+                color: orange;
+            }
+            td{
+                border: 1px solid black;
+                border-collapse: collapse;
+            }
+            .headercell{
+                background-color: #0066CC;
+                color: #FFFFFF;
+                text-align: center;
+                font-weight: bold;
+            }
+        </style>
+    </head>
+
+    <body>
+        <h1>{{ header }}</h1>
+        <p>Generated date: {{ date }}</p>
+        <table>
+            <tr>
+                <td class="headercell">Name</td>
+                <td class="headercell">Address</td>
+                <td class="headercell">Phone</td>
+                <td class="headercell">Introduction</td>
+            </tr>
+	{% for (var i = 0; i < students.length; i++) { %}
+            <tr>
+                <td>{{students[i].name}}</td>
+                <td>{{students[i].address}}</td>
+                <td>{{students[i].phone}}</td>
+                <td>{{students[i].getInfo()}}</td>
+            </tr>
+	{% } %}
+        </table>
+    </body>
+</html>

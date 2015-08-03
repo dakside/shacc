@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright (C) 2010 Le Tuan Anh <tuananh.ke@gmail.com>
+
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!--
+{%
+%}
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>{{ title }}</title>
+        <style type="text/css">
+            h1{
+                font-size: 18pt;
+                color: orange;
+                font-family: Verdana, Lucida Grande, sans-serif;
+                width: 100%;
+                text-align: center;
+                font-weight: bold;
+            }
+            p{
+                font-size: 9pt;
+                font-family: Verdana, Lucida Grande, sans-serif;
+                width: 100%;
+                text-align: left;
+            }
+            .ledger{
+                width: 100%;
+                font-family: Verdana, Lucida Grande, sans-serif;
+                font-size: 9pt;
+            }
+            .ledger_header{
+                text-align: center;
+                border-bottom: 1px solid black;
+                border-collapse:collapse;
+            }
+            .ledger_row{
+            }
+
+            .ledger_row_group{
+                border-bottom:1px solid black;
+                border-collapse:collapse;
+            }
+            .ledger_cell{
+                background-color: #FFFFFF;
+                color: #000000;
+            }
+            .ledger_cell_right{
+                background-color: #FFFFFF;
+                color: #000000;
+                text-align: right;
+            }
+            .ledger_cell_group{
+                color: #0066CC;
+                font-weight: bold;
+            }
+            .ledger_cell_group_right{
+                color: #0066CC;
+                font-weight: bold;
+                text-align: right;
+            }
+            .ledger_cell_total{
+                border-top: 1px solid black;
+                color: orange;
+                font-weight: bold;
+            }
+            .ledger_cell_total_right{
+                border-top: 1px solid black;
+                color: orange;
+                font-weight: bold;
+                text-align:right;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>{{ title }}</h1>
+        <p>Generated date: {{ new Date() }}</p>
+
+        <table class="ledger">
+            <thead>
+                <tr class="ledger_header">
+                    <td class="ledger_header" style="width:15%">&nbsp;</td>
+                    {%
+                        for(var i = 0; i < periods.length; i++){
+                        %}
+                        <td class="ledger_header" style="width:7%">{{periods[i]}}</td>
+                        {%
+                        }
+                    %}
+                    
+                </tr>
+            </thead>
+            <tfoot>
+                <tr class="ledger_row">
+                    <td class="ledger_cell_total">NET INCOME</td>
+                    {%
+                        for(var i = 0; i < total_income.balance.length; i++){
+                            %}
+                    <td class="ledger_cell_total_right">{{total_income.balance[i]}}</td>
+                            {%
+                        }
+                    %}
+                </tr>
+            </tfoot>
+            <tbody>
+                <tr class="ledger_row">
+                    <td class="ledger_cell_group">Revenue</td>
+                    <td class="ledger_cell_right">&nbsp;</td>
+                </tr>
+                {% for (var i = 0; i < revenue.length; i++){ %}
+                <tr class="ledger_row">
+                    <td class="ledger_cell">{{revenue[i].name}}</td>
+                    {%
+                        for(var j = 0; j < revenue[i].balance.length; j++){
+                            %}
+                    <td class="ledger_cell_right">{{revenue[i].balance[j]}}</td>
+                            {%
+                        }
+                    %}
+                </tr>
+                {% } %}
+                <tr class="ledger_row">
+                    <td class="ledger_cell" style="font-weight: bold;">GROSS PROFIT</td>
+                    {%
+                        for(var j = 0; j < gross_profit.balance.length; j++){
+                            %}
+                    <td class="ledger_cell_right" style="border-top: 1px solid black; font-weight: bold;">{{gross_profit.balance[j]}}</td>
+                            {%
+                        }
+                    %}
+                    
+                </tr>
+                <tr class="ledger_row">
+                    <td class="ledger_cell_group">Expenses</td>
+                    <td class="ledger_cell_right">&nbsp;</td>
+                </tr>
+                {% for (var i = 0; i < expenses.length; i++){ %}
+                <tr class="ledger_row">
+                    <td class="ledger_cell">{{expenses[i].name}}</td>
+                    {%
+                        for(var j = 0; j < expenses[i].balance.length; j++){
+                            %}
+                    <td class="ledger_cell_right">{{expenses[i].balance[j]}}</td>
+                            {%
+                        }
+                    %}
+                </tr>
+                {% } %}
+                <tr class="ledger_row">
+                    <td class="ledger_cell" style="font-weight: bold;">TOTAL EXPENSES</td>
+                    {%
+                        for(var j = 0; j < total_expenses.balance.length; j++){
+                            %}
+                    <td class="ledger_cell_right" style="border-top: 1px solid black; font-weight: bold;">{{total_expenses.balance[j]}}</td>
+                            {%
+                        }
+                    %}
+                </tr>
+            </tbody>
+        </table>
+    </body>
+</html>

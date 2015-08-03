@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+    <head>
+        <title>{{ title }}</title>
+        <style type="text/css">
+            h1{
+                font-size: 18pt;
+                color: orange;
+                font-family: Verdana, Lucida Grande, sans-serif;
+                width: 100%;
+                text-align: center;
+                font-weight: bold;
+            }
+            p{
+                font-size: 9pt;
+                font-family: Verdana, Lucida Grande, sans-serif;
+                width: 100%;
+                text-align: left;
+            }
+            .ledger{
+                width: 100%;
+                font-family: Verdana, Lucida Grande, sans-serif;
+                font-size: 9pt;
+            }
+            .ledger_header{
+                text-align: center;
+                border-bottom: 1px solid black;
+                border-collapse:collapse;
+            }
+            .ledger_header_left{
+                text-align: left;
+                border-bottom: 1px solid black;
+                border-collapse:collapse;
+            }
+            .ledger_row{
+            }
+
+            .ledger_row_group{
+                border-bottom:1px solid black;
+                border-collapse:collapse;
+            }
+            .ledger_cell{
+                background-color: #FFFFFF;
+                color: #000000;
+            }
+            .ledger_cell_right{
+                text-align: right;
+                background-color: #FFFFFF;
+                color: #000000;
+                
+            }
+            .ledger_cell_group{
+                color: #0066CC;
+                font-weight: bold;
+            }
+            .ledger_cell_group_right{
+                text-align: right;
+                color: #0066CC;
+                font-weight: bold;
+                
+            }
+            .ledger_cell_total{
+                border-top: 1px solid black;
+                color: orange;
+                font-weight: bold;
+            }
+            .ledger_cell_total_right{
+                border-top: 1px solid black;
+                color: orange;
+                font-weight: bold;
+                text-align:right;
+            }
+        </style>
+    </head>
+
+    <body>
+        <h1>Balance Sheet</h1>
+        <p>Generated date: 01 Jan 2010</p>
+
+        <table class="ledger">
+            <thead>
+                <tr class="ledger_header">
+                    <td class="ledger_header_left">Accounts</td>
+                    <td class="ledger_header">2009</td>
+                    <td class="ledger_header">2010</td>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr class="ledger_row">
+                    <td class="ledger_cell_total">Total</td>
+                    <td class="ledger_cell_total_right">1000</td>
+                    <td class="ledger_cell_total_right">500</td>
+                </tr>
+            </tfoot>
+            <tbody>
+                <tr class="ledger_row_group">
+                    <td class="ledger_cell" colspan="3">Assets</td>
+                </tr>
+                <tr class="ledger_row">
+                    <td class="ledger_cell">Cash</td>
+                    <td class="ledger_cell_right">100</td>
+                    <td class="ledger_cell_right">50</td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
+</html>
